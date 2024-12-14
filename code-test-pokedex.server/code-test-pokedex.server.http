@@ -1,0 +1,6 @@
+@code_test_pokedex.server_HostAddress = http://localhost:5176
+
+code_test_pokedex.server_HostAddress
+Accept: application/json
+
+###
