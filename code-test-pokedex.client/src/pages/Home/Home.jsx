@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import useFetch from "../hooks/useFetch";
 import PokemonCard from "../../components/PokemonCard/PokemonCard";
 import Form from "../../components/Form/Form";
+import * as styles from "./Home.module.css";
 
 export default function Home() {
   //Try connetction by setting the url to the api using a random id
@@ -19,12 +20,12 @@ export default function Home() {
   };
 
   return (
-    <>
-      <h1>Pokedex</h1>
-      <Form setPokemon={fetchPokemon} />
+    <main className={styles.container}>
+      <h1 className={styles.header}>Pokedex</h1>
       {loading && <div>Loading...</div>}
       {pokemon && <PokemonCard pokemon={pokemon} />}
       {error && <div>{error.message}</div>}
-    </>
+      <Form setPokemon={fetchPokemon} />
+    </main>
   );
 }

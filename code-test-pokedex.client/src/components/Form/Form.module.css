@@ -1,0 +1,37 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.input,
+.invalidInput {
+  width: 100%;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 16px;
+}
+.invalidInput,
+.error {
+  color: var(--charmeleon-red);
+  font-weight: 600;
+}
+.invalidInput {
+  border: 2px solid var(--charmeleon-red);
+}
+.invalidInput:focus {
+  outline: none;
+}
+.error {
+  font-size: 14px;
+  margin-top: 0.5rem;
+}
+.button {
+  background-color: var(--charmeleon-red);
+  color: white;
+  margin-left: 0.3rem;
+}

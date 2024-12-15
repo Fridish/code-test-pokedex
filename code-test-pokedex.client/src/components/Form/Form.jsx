@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
+import * as styles from "./Form.module.css";
 
 export default function Form({ setPokemon }) {
   const [pokemonName, setPokemonName] = useState("");
+  const [debouncedInputValue, setDebouncedInputValue] = useState("");
   const [error, setError] = useState("");
 
   const validateSearchParam = (textInput) => {
@@ -27,27 +29,51 @@ export default function Form({ setPokemon }) {
     return true;
   };
 
+  useEffect(() => {
+    // verify the input field after a delay to indicate to the user if their value is acceptable
+    const timeOutId = setTimeout(() => {
+      setDebouncedInputValue(pokemonName);
+    }, 300);
+    return () => clearTimeout(timeOutId);
+  }, [pokemonName, 300]);
+
+  useEffect(() => {
+    if (debouncedInputValue) {
+      validateSearchParam(debouncedInputValue);
+    }
+  }, [debouncedInputValue, validateSearchParam]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     //  validate input before seending it back
     if (validateSearchParam(pokemonName)) {
+      if (!error === "") {
+        error = "";
+      }
       setPokemon(pokemonName.trim());
     }
   };
   const handleChange = (e) => {
     setPokemonName(e.target.value);
   };
-  const fetchRandomPokemon = () => {
-    const id = Math.floor(Math.random() * 1024) + 1;
-    setPokemon(id);
-  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <p>Sök efter ett pokémon med hjälp av dess namn eller id</p>
-      <button onClick={fetchRandomPokemon}>Hämta slumpmässig pokemon</button>
-      <input type="text" value={pokemonName} onChange={handleChange} />
-      <button type="submit">Sök</button>
-      {error && <p>{error}</p>}
-    </form>
+    <>
+      <form onSubmit={handleSubmit} className={styles.formContainer}>
+        <p>Sök efter en pokémon med hjälp av dess namn eller id</p>
+        <section className={styles.inputContainer}>
+          <input
+            className={error ? styles.invalidInput : styles.input}
+            type="text"
+            value={pokemonName}
+            onChange={handleChange}
+          />
+          <button className={styles.button} type="submit">
+            Sök
+          </button>
+        </section>
+        {error && <p className={styles.error}>{error}</p>}
+      </form>
+    </>
   );
 }
