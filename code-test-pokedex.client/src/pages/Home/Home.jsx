@@ -10,7 +10,7 @@ export default function Home() {
     );
 
     const fetchRandomPokemon = () => {
-        const id = Math.floor(Math.random() * 1024) + 1000;
+        const id = Math.floor(Math.random() * 1024) + 1;
         setRandomId(id);
     };
 if (pokemon){
