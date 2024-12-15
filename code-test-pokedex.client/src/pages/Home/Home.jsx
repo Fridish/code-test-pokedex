@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import useFetch from "../hooks/useFetch";
+import PokemonCard from "../../components/PokemonCard/PokemonCard";
 
 export default function Home() {
     //Try connetction by setting the url to the api using a random id
     const [randomId, setRandomId] = useState(null);
     const { data: pokemon, loading, error } = useFetch(
-        randomId != null ? `http://localhost:5176/api/pokemon/${randomId}` : null
+        randomId ? `http://localhost:5176/api/pokemon/${randomId}` : null
     );
 
     const fetchRandomPokemon = () => {
-        const id = Math.floor(Math.random() * 1024) + 1;
+        const id = Math.floor(Math.random() * 1024) + 1000;
         setRandomId(id);
     };
 if (pokemon){
@@ -22,7 +23,7 @@ if (pokemon){
             <input type="text" />
             <button onClick={fetchRandomPokemon}>Fetch random pokemon</button>
             {loading && <div>Loading...</div>}
-            {pokemon && <div>{JSON.stringify(pokemon)}</div>}
+            {pokemon && <PokemonCard pokemon={pokemon} />}
             {error && <div>{error.message}</div>}
         </div>
     );
