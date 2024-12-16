@@ -16,13 +16,13 @@ export default function Form({ setPokemon }) {
     }
     const numberInput = Number(trimmed);
     if (!isNaN(numberInput)) {
-      if (numberInput <= 0 || numberInput >= 1026) {
-        setError("Id must be between 1-1025");
+      if (numberInput <= 0) {
+        setError("Id must be greater than 0");
         return false;
       }
     } else {
-      if (trimmed.length > 11 || trimmed.length < 3) {
-        setError("Name must be between 3 and 11 characters long");
+      if (trimmed.length > 20 || trimmed.length < 3) {
+        setError("Name must be between 3 and 20 characters");
         return false;
       }
     }
@@ -60,16 +60,19 @@ export default function Form({ setPokemon }) {
   return (
     <>
       <form onSubmit={handleSubmit} className={styles.formContainer}>
-        <p>Sök efter en pokémon med hjälp av dess namn eller id</p>
+        {/* <small className={styles.helperText}>
+          Sök efter en pokémon med hjälp av dess namn eller id
+        </small> */}
         <section className={styles.inputContainer}>
           <input
             className={error ? styles.invalidInput : styles.input}
             type="text"
             value={pokemonName}
             onChange={handleChange}
+            placeholder="Search for name or id"
           />
           <button className={styles.button} type="submit">
-            Sök
+            Search
           </button>
         </section>
         {error && <p className={styles.error}>{error}</p>}

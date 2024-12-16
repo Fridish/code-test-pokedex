@@ -18,7 +18,6 @@ namespace code_test_pokedex.server.Controllers
             _logger = logger;
         }
 
-
         ///<summary>
         /// Fetches a Pokémon based on the identifier. Could be either name or id
         /// </summary>
@@ -53,7 +52,7 @@ namespace code_test_pokedex.server.Controllers
                 }
                 else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
-                    return NotFound($"Pokémon with id: {id} could not be found");
+                    return NotFound($"Pokémon could not be found");
                 }
                 else
                 {

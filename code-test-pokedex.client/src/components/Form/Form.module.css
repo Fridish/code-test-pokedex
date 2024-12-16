@@ -1,6 +1,11 @@
 .formContainer {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  max-width: 100%;
+  height: 4.5rem;
+  width: 280px;
+  margin-top: 1rem;
 }
 
 .inputContainer {
@@ -14,11 +19,11 @@
   border-radius: 8px;
   padding: 0.5rem 1rem;
   font-size: 16px;
+  font-family: var(--header-font);
 }
 .invalidInput,
 .error {
   color: var(--charmeleon-red);
-  font-weight: 600;
 }
 .invalidInput {
   border: 2px solid var(--charmeleon-red);
@@ -27,11 +32,18 @@
   outline: none;
 }
 .error {
+  height: 10px;
+}
+.helperText {
+  font-style: italic;
+}
+.error,
+.helperText {
   font-size: 14px;
   margin-top: 0.5rem;
 }
 .button {
   background-color: var(--charmeleon-red);
-  color: white;
+  color: var(--lugia-white);
   margin-left: 0.3rem;
 }

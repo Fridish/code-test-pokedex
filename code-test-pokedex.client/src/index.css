@@ -1,12 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -15,7 +10,13 @@
   /* colors */
   --greninja-blue: #060834;
   --haunter-purple: #4c1c59;
-  --charmeleon-red: #f5341a;
+  --charmeleon-red: #fd2609;
+  --lugia-white: #f9f9f9;
+  --jigglypuff-pink: #ffd8e2;
+  --dark-jugglypuff-pink: #ed9a9c;
+
+  /* typography */
+  --header-font: "Jua", sans-serif;
 }
 
 a {
@@ -33,6 +34,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  font-family: var(--header-font);
 }
 
 h1 {
@@ -47,27 +49,13 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #aa1616;
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #16171a;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }

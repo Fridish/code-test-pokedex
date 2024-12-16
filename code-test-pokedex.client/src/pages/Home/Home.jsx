@@ -18,13 +18,16 @@ export default function Home() {
   const fetchPokemon = (textInput) => {
     setSearchParam(textInput);
   };
+  console.log(error);
 
   return (
     <main className={styles.container}>
       <h1 className={styles.header}>Pokedex</h1>
-      {loading && <div>Loading...</div>}
       {pokemon && <PokemonCard pokemon={pokemon} />}
-      {error && <div>{error.message}</div>}
+      <section className={styles.searchErrorContainer}>
+        {loading && <div>Searching...</div>}
+        {error && <p className={styles.error}>{error.response.data}</p>}
+      </section>
       <Form setPokemon={fetchPokemon} />
     </main>
   );
