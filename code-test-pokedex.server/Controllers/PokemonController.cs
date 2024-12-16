@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
 
-namespace pokedex_code_test.Server.Controllers
+namespace code_test_pokedex.server.Controllers
 {
     [ApiController]
     [Route("api/pokemon")]
