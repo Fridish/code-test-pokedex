@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
 
-namespace pokedex_code_test.Server.Controllers
+namespace code_test_pokedex.server.Controllers
 {
     [ApiController]
     [Route("api/pokemon")]
@@ -18,12 +18,17 @@ namespace pokedex_code_test.Server.Controllers
             _logger = logger;
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Pokemon>> GetPokemonById(int id)
+
+        ///<summary>
+        /// Fetches a Pokémon based on the identifier. Could be either name or id
+        /// </summary>
+        [HttpGet("{identifier}")]
+        public async Task<ActionResult<Pokemon>> GetPokemonByIdentifier(string identifier)
         {
-            if (id <= 0 || id >= 1025)
+            string id = identifier.Trim();
+            if (!VerifyId(id))
             {
-                return BadRequest("Invalid Pokemon ID");
+                return BadRequest("Invalid Pokémon ID");
             }
             try
             {
@@ -48,11 +53,11 @@ namespace pokedex_code_test.Server.Controllers
                 }
                 else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
-                    return NotFound($"Status code: 404. Pokemon with id: {id} not found");
+                    return NotFound($"Pokémon with id: {id} could not be found");
                 }
                 else
                 {
-                    return BadRequest("Failed to fetch pokemon");
+                    return BadRequest("Failed to fetch pokémon");
                 }
             }
             catch (Exception exception)
@@ -61,5 +66,21 @@ namespace pokedex_code_test.Server.Controllers
                 return BadRequest(exception.Message);
             }
         }
+        private static bool VerifyId(string id)
+        {
+            bool valid = true;
+
+            if (string.IsNullOrEmpty(id) || string.IsNullOrWhiteSpace(id))
+            {
+                valid = false;
+            }
+            if (int.TryParse(id?.ToString(), out int identifier)
+                && identifier < 1)
+            {
+                valid = false;
+            }
+            return valid;
+        }
+
     }
 }
