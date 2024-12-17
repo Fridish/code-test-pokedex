@@ -42,7 +42,11 @@
   font-size: 14px;
   margin-top: 0.5rem;
 }
+.error {
+  font-weight: 500;
+}
 .button {
+  width: 30%;
   background-color: var(--charmeleon-red);
   color: var(--lugia-white);
   margin-left: 0.3rem;

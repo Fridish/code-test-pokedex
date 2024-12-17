@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <main className={styles.container}>
       <h1 className={styles.header}>Pokedex</h1>
-      {pokemon && <PokemonCard pokemon={pokemon} />}
+      <PokemonCard pokemon={pokemon} />
       <section className={styles.searchErrorContainer}>
         {loading && <div>Searching...</div>}
         {error && <p className={styles.error}>{error.response.data}</p>}
