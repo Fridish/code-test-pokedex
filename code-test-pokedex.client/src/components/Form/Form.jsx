@@ -9,7 +9,12 @@ export default function Form({ setPokemon }) {
   const trimPokemonName = (pokemonName) => {
     pokemonName = pokemonName.trim();
     pokemonName = pokemonName.toLowerCase();
-    return pokemonName.replace(/\s/g, "-");
+    // replace any unwanted characters
+    pokemonName = pokemonName
+      .replace(/[^a-zA-Z0-9\s]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/^-+|-+$/g, "");
+    return pokemonName;
   };
   const validateSearchParam = (textInput) => {
     // trim the input to remove any leading or trailing whitespace, then validate the input
@@ -51,7 +56,10 @@ export default function Form({ setPokemon }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     //  validate input before seending it back
-    if (validateSearchParam(pokemonName)) {
+    if (
+      validateSearchParam(pokemonName) &&
+      trimPokemonName(pokemonName) !== ""
+    ) {
       setPokemon(trimPokemonName(pokemonName));
     }
   };
