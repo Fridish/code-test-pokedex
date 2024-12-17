@@ -1,7 +1,5 @@
 import * as styles from "./PokemonCard.module.css";
 export default function PokemonCard({ pokemon }) {
-  console.log(pokemon);
-
   switch (true) {
     case !pokemon:
       return (
@@ -18,16 +16,17 @@ export default function PokemonCard({ pokemon }) {
         <main className={styles.container}>
           <img
             className={styles.image}
-            src="../../../public/quizhead1.jpg"
+            src="https://www.outcyders.net/images/quizzes/4/quizhead1.jpg"
             alt="Loading"
           />
         </main>
       );
     default:
+      const name = pokemon.name.replace("-", " ").toUpperCase();
       return (
         <main className={styles.container}>
           <h2 className={styles.title}>
-            #{pokemon.id} {pokemon.name?.toUpperCase()}
+            #{pokemon.id} {name}
           </h2>
           <img
             className={styles.image}

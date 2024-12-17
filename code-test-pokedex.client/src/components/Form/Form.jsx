@@ -6,6 +6,11 @@ export default function Form({ setPokemon }) {
   const [debouncedInputValue, setDebouncedInputValue] = useState("");
   const [error, setError] = useState("");
 
+  const trimPokemonName = (pokemonName) => {
+    pokemonName = pokemonName.trim();
+    pokemonName = pokemonName.toLowerCase();
+    return pokemonName.replace(/\s/g, "-");
+  };
   const validateSearchParam = (textInput) => {
     // trim the input to remove any leading or trailing whitespace, then validate the input
     setError("");
@@ -47,10 +52,7 @@ export default function Form({ setPokemon }) {
     e.preventDefault();
     //  validate input before seending it back
     if (validateSearchParam(pokemonName)) {
-      if (!error === "") {
-        error = "";
-      }
-      setPokemon(pokemonName.trim());
+      setPokemon(trimPokemonName(pokemonName));
     }
   };
   const handleChange = (e) => {
@@ -60,9 +62,6 @@ export default function Form({ setPokemon }) {
   return (
     <>
       <form onSubmit={handleSubmit} className={styles.formContainer}>
-        {/* <small className={styles.helperText}>
-          Sök efter en pokémon med hjälp av dess namn eller id
-        </small> */}
         <section className={styles.inputContainer}>
           <input
             className={error ? styles.invalidInput : styles.input}
