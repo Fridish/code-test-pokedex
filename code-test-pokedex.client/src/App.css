@@ -4,3 +4,11 @@
   padding: 2rem;
   text-align: center;
 }
+html {
+  background: rgb(6, 8, 52);
+  background: linear-gradient(
+    133deg,
+    var(--greninja-blue) 8%,
+    var(--haunter-purple) 90%
+  );
+}

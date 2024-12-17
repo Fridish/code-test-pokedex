@@ -1,30 +1,34 @@
 import React, { useState } from "react";
 import useFetch from "../hooks/useFetch";
 import PokemonCard from "../../components/PokemonCard/PokemonCard";
+import Form from "../../components/Form/Form";
+import * as styles from "./Home.module.css";
 
 export default function Home() {
-    //Try connetction by setting the url to the api using a random id
-    const [randomId, setRandomId] = useState(null);
-    const { data: pokemon, loading, error } = useFetch(
-        randomId ? `http://localhost:5176/api/pokemon/${randomId}` : null
-    );
+  //Try connetction by setting the url to the api using a random id
+  const [searchParam, setSearchParam] = useState(null);
+  const {
+    data: pokemon,
+    loading,
+    error,
+  } = useFetch(
+    searchParam ? `http://localhost:5176/api/pokemon/${searchParam}` : null
+  );
 
-    const fetchRandomPokemon = () => {
-        const id = Math.floor(Math.random() * 1024) + 1;
-        setRandomId(id);
-    };
-if (pokemon){
-    console.log(pokemon)
-}
-    return (
-        <div>
-            <h1>Pokedex</h1>
-            <p>Search for an id or pokemon name to find a specific pokemon</p>
-            <input type="text" />
-            <button onClick={fetchRandomPokemon}>Fetch random pokemon</button>
-            {loading && <div>Loading...</div>}
-            {pokemon && <PokemonCard pokemon={pokemon} />}
-            {error && <div>{error.message}</div>}
-        </div>
-    );
+  const fetchPokemon = (textInput) => {
+    setSearchParam(textInput);
+  };
+  console.log(error);
+
+  return (
+    <main className={styles.container}>
+      <h1 className={styles.header}>Pokedex</h1>
+      <PokemonCard pokemon={pokemon} />
+      <section className={styles.searchErrorContainer}>
+        {loading && <div>Searching...</div>}
+        {error && <p className={styles.error}>{error.response.data}</p>}
+      </section>
+      <Form setPokemon={fetchPokemon} />
+    </main>
+  );
 }

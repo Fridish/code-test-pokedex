@@ -1,0 +1,20 @@
+.container {
+  background-color: var(--jigglypuff-pink);
+  border-radius: 8px;
+  padding: 3rem 2rem 3rem 2rem;
+  overflow: hidden;
+  box-shadow: 5px 10px 5px rgba(0, 0, 0, 0.5);
+}
+.searchErrorContainer {
+  height: 2.5rem;
+  overflow: hidden;
+}
+.header {
+  padding: 0;
+  margin: 0;
+}
+.error {
+  color: var(--charmeleon-red);
+  font-weight: 600;
+  font-size: 18px;
+}
